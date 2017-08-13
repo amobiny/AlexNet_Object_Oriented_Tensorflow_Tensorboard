@@ -4,18 +4,15 @@ University of Houston, TX/USA
 **********************************************************************************
 Author:   Aryan Mobiny
 Date:     6/1/2017
-Comments:
+Comments: Run this file to train the Alexnet model and save the best trained model
 **********************************************************************************
 """
 
 from datetime import datetime
 import time
-import h5py
-import numpy as np
 import tensorflow as tf
 from utils import *
 from AlexNet import Alexnet
-import sys
 import os
 
 now = datetime.now()
@@ -31,10 +28,9 @@ def train(image_size=28,
           display=100):
 
     # Loading the MNIST data
-    X_train, Y_train, X_valid, Y_valid, X_test, Y_test = load_data(image_size, num_classes, num_channels)
+    X_train, Y_train, X_valid, Y_valid = load_data(image_size, num_classes, num_channels, mode='train')
     print('Training set', X_train.shape, Y_train.shape)
     print('Validation set', X_valid.shape, Y_valid.shape)
-    print('Test set', X_test.shape, Y_test.shape)
 
     # Creating the alexnet model
     model = Alexnet(num_classes, image_size, num_channels)
@@ -113,6 +109,6 @@ if __name__ == '__main__':
     train(image_size=28,
           num_classes=10,
           num_channels=1,
-          num_epochs=100,
+          num_epochs=10,
           batch_size=128,
           display=100)

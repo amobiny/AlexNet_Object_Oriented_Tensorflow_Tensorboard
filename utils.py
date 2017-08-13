@@ -14,15 +14,18 @@ import scipy
 from tensorflow.examples.tutorials.mnist import input_data
 
 
-def load_data(image_size, num_classes, num_channels):
+def load_data(image_size, num_classes, num_channels, mode='train'):
     mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-    x_train, y_train, x_valid, y_valid, x_test, y_test = mnist.train.images, mnist.train.labels, \
-                                                         mnist.validation.images, mnist.validation.labels, \
-                                                         mnist.test.images, mnist.test.labels
-    x_train, _ = reformat(x_train, y_train, image_size, num_channels, num_classes)
-    x_valid, _ = reformat(x_valid, y_valid, image_size, num_channels, num_classes)
-    x_test, _ = reformat(x_test, y_test, image_size, num_channels, num_classes)
-    return x_train, y_train, x_valid, y_valid, x_test, y_test
+    if mode == 'train':
+        x_train, y_train, x_valid, y_valid = mnist.train.images, mnist.train.labels, \
+                                             mnist.validation.images, mnist.validation.labels
+        x_train, _ = reformat(x_train, y_train, image_size, num_channels, num_classes)
+        x_valid, _ = reformat(x_valid, y_valid, image_size, num_channels, num_classes)
+        return x_train, y_train, x_valid, y_valid
+    elif mode == 'test':
+        x_test, y_test = mnist.test.images, mnist.test.labels
+        x_test, _ = reformat(x_test, y_test, image_size, num_channels, num_classes)
+    return x_test, y_test
 
 def randomize(x, y):
     """ Randomizes the order of data samples and their corresponding labels"""

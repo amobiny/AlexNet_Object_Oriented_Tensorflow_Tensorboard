@@ -37,11 +37,11 @@ class Alexnet:
 
     def create_placeholders(self):
         with tf.name_scope('Input'):
-            self.x = tf.placeholder(tf.float32, shape=(None, self.imgSize, self.imgSize, self.imgChannel),
-                                    name='x-input')
-            self.y = tf.placeholder(tf.float32, shape=(None, self.numClass), name='y-input')
-            self.keep_prob = tf.placeholder(tf.float32)
-        return self.x, self.y, self.keep_prob
+            x = tf.placeholder(tf.float32, shape=(None, self.imgSize, self.imgSize, self.imgChannel),
+                              name='x-input')
+            y = tf.placeholder(tf.float32, shape=(None, self.numClass), name='y-input')
+            keep_prob = tf.placeholder(tf.float32)
+        return x, y, keep_prob
 
     def inference(self):
         if self.__network:

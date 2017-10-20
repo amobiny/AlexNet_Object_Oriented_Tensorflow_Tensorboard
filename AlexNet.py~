@@ -64,10 +64,8 @@ class Alexnet:
             net = fc_layer(net, self.h2, 'FC2', add_reg=False, use_relu=True)
             net = dropout(net, self.keep_prob)
             net = fc_layer(net, self.numClass, 'FC3', add_reg=False, use_relu=False)
-	
-	# Comment the above section and uncomment the following one if you wanna use the AlexNet
-        # Network with Batch-Normalization layer after each layer (instead of local-response normalization)
 
+        # Network with Batch-Normalization layer after each layer
         # with tf.variable_scope('AlexNet'):
         #     net = conv_2d(self.x, 4, 1, 16, 'CONV1',
         #                   is_train=self.is_train, batch_norm=True, add_reg=False, use_relu=True)
@@ -91,7 +89,7 @@ class Alexnet:
         #     net = dropout(net, self.keep_prob)
         #     net = fc_layer(net, self.numClass, 'FC3',
         #                    is_train=self.is_train, batch_norm=True, add_reg=False, use_relu=False)
-        
+        #
             self.__network = net
             return self
         return self

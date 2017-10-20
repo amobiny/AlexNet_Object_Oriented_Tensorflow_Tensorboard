@@ -55,7 +55,8 @@ def random_rotation_2d(batch, max_angle):
     Arguments:
     max_angle: `float`. The maximum rotation angle.
 
-    Returns: batch of randomly rotated 2D images
+    Returns:
+    batch of rotated 2D images
     """
     size = batch.shape
     batch = np.squeeze(batch)
